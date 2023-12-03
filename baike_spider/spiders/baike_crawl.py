@@ -1,3 +1,4 @@
+import os
 import re
 import time
 from urllib.parse import unquote
@@ -15,7 +16,9 @@ from utils import logger, redis_util
 class BaikeCrawlSpider(CrawlSpider):
     name = "baike_crawl"
     allowed_domains = ["baike.baidu.com"]
-    start_url = redis_util.redis_conn.lpop("url_list")
+    start_url = os.getenv("START_URL")
+    if not start_url:
+        start_url = redis_util.redis_conn.lpop("url_list")
     start_urls = [start_url]
     rules = (Rule(LinkExtractor(allow=r"/item/([^/]+)/(\d+)"), callback="parse_item", follow=True),)
     # proxy_url = ("https://tps.kdlapi.com/api/gettps/?secret_id=oeb8i6leie0jh4v5xrda&num=1&signature="
@@ -58,7 +61,6 @@ class BaikeCrawlSpider(CrawlSpider):
                 total_topics = int(redis_util.redis_conn.get("topics_number"))
                 total_time_used = int(redis_util.redis_conn.get("total_time"))
                 total_duplicate = int(redis_util.redis_conn.get("total_duplicate"))
-                logger.info(f"{self.total}:已爬取{total_topics}条数据，用时{total_time_used // 60}分{total_time_used % 60}秒")
+                logger.info(
+                    f"{self.total}:已爬取{total_topics}条数据，用时{total_time_used // 60}分{total_time_used % 60}秒")
                 logger.info(f"累计重复{total_duplicate}条，重复率：{(total_duplicate * 100 / total_topics):.2f}%")
-
-
