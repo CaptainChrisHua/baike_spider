@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-from utc_spider.settings import SQLALCHEMY_CONFIG, LOG_PATH, LOG_LEVEL, REDIS_CONFIG
+from baike_spider.settings import SQLALCHEMY_CONFIG, LOG_PATH, LOG_LEVEL, REDIS_CONFIG
 from utils.log_utils import LogUtil
 from utils.mysql_util import SQLAlchemyUtil
 from utils.redis_util import RedisUtil

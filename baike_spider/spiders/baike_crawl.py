@@ -5,11 +5,11 @@ from urllib.parse import unquote
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 
-from utc_spider.items import BaikeItem
+from baike_spider.items import BaikeItem
 from utils import logger, redis_util
 
 
-# from utc_spider.items import BaikeItem
+# from baike_spider.items import BaikeItem
 
 
 class BaikeCrawlSpider(CrawlSpider):

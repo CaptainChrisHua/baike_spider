@@ -6,7 +6,7 @@ import time
 
 # useful for handling different item types with a single interface
 
-from utc_spider.orm.baike_model import BaikeDo
+from baike_spider.orm.baike_model import BaikeDo
 from utils import db, logger, redis_util
 
 

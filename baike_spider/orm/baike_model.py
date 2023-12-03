@@ -3,7 +3,7 @@ __author__ = 'chris'
 
 from sqlalchemy import Column, Integer, String, Text
 
-from utc_spider.orm import BaseDao
+from baike_spider.orm import BaseDao
 
 
 class BaikeDo(BaseDao):

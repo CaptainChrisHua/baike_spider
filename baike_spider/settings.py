@@ -1,4 +1,4 @@
-# Scrapy settings for utc_spider project
+# Scrapy settings for baike_spider project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,17 +7,17 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "utc_spider"
+BOT_NAME = "baike_spider"
 
-SPIDER_MODULES = ["utc_spider.spiders"]
-NEWSPIDER_MODULE = "utc_spider.spiders"
+SPIDER_MODULES = ["baike_spider.spiders"]
+NEWSPIDER_MODULE = "baike_spider.spiders"
 
 LOG_FILE = "/root/baike_spider/logs/all.log"
-LOG_LEVEL = "DEBUG"
+LOG_LEVEL = "INFO"
 LOG_PATH = "/root/baike_spider/logs"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "utc_spider (+http://www.yourdomain.com)"
+#USER_AGENT = "baike_spider (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -48,14 +48,14 @@ CONCURRENT_REQUESTS = 5
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    "utc_spider.middlewares.UtcSpiderSpiderMiddleware": 543,
+#    "baike_spider.middlewares.UtcSpiderSpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   "utc_spider.middlewares.RandomUserAgent": 43,
-   'utc_spider.middlewares.ProxyDownloaderMiddleware': 100
+   "baike_spider.middlewares.RandomUserAgent": 43,
+   'baike_spider.middlewares.ProxyDownloaderMiddleware': 100
 }
 
 # Enable or disable extensions
@@ -67,7 +67,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   "utc_spider.pipelines.BaikePipeline": 300,
+   "baike_spider.pipelines.BaikePipeline": 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

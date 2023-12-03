@@ -16,4 +16,4 @@ WORKDIR /root/project/baike_spider
 
 ENV PYTHONPATH=/root/project/baike_spider
 
-CMD scrapy runspider /root/project/baike_spider/utc_spider/spiders/baike_crawl.py
+CMD scrapy runspider /root/project/baike_spider/baike_spider/spiders/baike_crawl.py
