@@ -1,0 +1,11 @@
+# -*- coding:utf-8 -*-
+from utc_spider.settings import SQLALCHEMY_CONFIG, LOG_PATH, LOG_LEVEL, REDIS_CONFIG
+from utils.log_utils import LogUtil
+from utils.mysql_util import SQLAlchemyUtil
+from utils.redis_util import RedisUtil
+
+db = SQLAlchemyUtil(SQLALCHEMY_CONFIG)
+
+
+logger = LogUtil(log_path=LOG_PATH, log_level=LOG_LEVEL)
+redis_util = RedisUtil(REDIS_CONFIG)
