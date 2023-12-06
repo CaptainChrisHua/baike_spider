@@ -12,7 +12,7 @@ BOT_NAME = "baike_spider"
 SPIDER_MODULES = ["baike_spider.spiders"]
 NEWSPIDER_MODULE = "baike_spider.spiders"
 
-# LOG_FILE = "/root/baike_spider/logs/all.log"
+LOG_FILE = "/root/baike_spider/logs/all.log"
 LOG_LEVEL = "INFO"
 LOG_PATH = "/root/baike_spider/logs"
 
