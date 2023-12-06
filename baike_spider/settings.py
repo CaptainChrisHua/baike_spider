@@ -97,24 +97,24 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
 SQLALCHEMY_CONFIG = {
-    'host': '43.132.152.169',
-    'port': 3306,
-    'database': 'baike',
-    'username': 'chris',
-    'password': 'chris',
-    "charset": "utf8mb4",  # 字符类型
-    "pool_size": 10,  # 连接池size
-    "max_overflow": 10,  # 超过连接池最大连接数
-    "pool_recycle": 60,  # 60s回收一次连接
-    "autoflush": False,  # 自动刷新(事务过程中刷新数据)
-    "autocommit": False,  # 自动提交事务
-    "connect_timeout": 10,  # 连接超时10s
-    "echo": False  # 打印sql语句
+   'host': '101.34.249.241',
+   'port': 3308,
+   'database': 'baike',
+   'username': 'root',
+   'password': 'chris',
+   "charset": "utf8mb4",  # 字符类型
+   "pool_size": 10,  # 连接池size
+   "max_overflow": 10,  # 超过连接池最大连接数
+   "pool_recycle": 60,  # 60s回收一次连接
+   "autoflush": False,  # 自动刷新(事务过程中刷新数据)
+   "autocommit": False,  # 自动提交事务
+   "connect_timeout": 10,  # 连接超时10s
+   "echo": False  # 打印sql语句
 }
 
 REDIS_CONFIG = {
-    'host': '43.132.152.169',
-    'port': '6666',
-    'db': '6',
-    'password': 'chris'
+   'host': '101.34.249.241',
+   'port': '6666',
+   'db': '6',
+   'password': 'chris'
 }
