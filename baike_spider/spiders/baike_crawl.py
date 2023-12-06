@@ -34,6 +34,8 @@ class BaikeCrawlSpider(CrawlSpider):
     total = 0
     total_response_size = 0
     start_time = time.time()
+    if os.getenv("TRAFFIC"):
+        traffic_start_time = time.time()
 
     def parse_item(self, response):
         self.total += 1
@@ -56,6 +58,9 @@ class BaikeCrawlSpider(CrawlSpider):
             item["source"] = "baike"
             yield item
             self.count += 1
+            if os.getenv("TRAFFIC"):
+                time_used = int(time.time() - self.traffic_start_time)
+                logger.info(f"已访问{self.total}条数据，平均流量{int(self.total_response_size / time_used / 1024)}kb/s")
             if self.count % 100 == 0:
                 redis_util.redis_conn.incrby("topics_number", 100)
                 time_used = int(time.time() - self.start_time)
