@@ -12,9 +12,9 @@ BOT_NAME = "baike_spider"
 SPIDER_MODULES = ["baike_spider.spiders"]
 NEWSPIDER_MODULE = "baike_spider.spiders"
 
-LOG_FILE = "/root/baike_spider/logs/all.log"
+# LOG_FILE = "/root/logs/baiker/all.log"
 LOG_LEVEL = "INFO"
-LOG_PATH = "/root/baike_spider/logs"
+LOG_PATH = "/root/logs/baiker"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = "baike_spider (+http://www.yourdomain.com)"
@@ -23,7 +23,7 @@ LOG_PATH = "/root/baike_spider/logs"
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 5
+CONCURRENT_REQUESTS = 10
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay

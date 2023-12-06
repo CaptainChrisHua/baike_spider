@@ -27,7 +27,6 @@ class BaikePipeline:
             source=item.get('source'),
             text=item.get('text')
         )
-        start_time = time.time()
         db.session.add(obj)
         try:
             db.session.flush()
@@ -37,6 +36,4 @@ class BaikePipeline:
             if hasattr(e, 'orig'):
                 if e.orig.args[0] == 1062:
                     redis_util.incr("total_duplicate")
-        time_used = int((time.time() -start_time)*1000)
-        logger.info(f"连接mysql用时:{time_used}ms")
         return item
