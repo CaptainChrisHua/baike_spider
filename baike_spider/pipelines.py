@@ -8,6 +8,7 @@ import time
 
 from baike_spider.orm.baike_model import BaikeDo
 from utils import db, logger, redis_util
+from utils.decorator_utils import timer
 
 
 class UtcSpiderPipeline:
@@ -16,6 +17,8 @@ class UtcSpiderPipeline:
 
 
 class BaikePipeline:
+
+    @timer(unit="ms")
     def process_item(self, item, spider):
         obj = BaikeDo(
             topic_id=item.get('topic_id'),
@@ -24,6 +27,7 @@ class BaikePipeline:
             source=item.get('source'),
             text=item.get('text')
         )
+        start_time = time.time()
         db.session.add(obj)
         try:
             db.session.flush()
@@ -33,4 +37,6 @@ class BaikePipeline:
             if hasattr(e, 'orig'):
                 if e.orig.args[0] == 1062:
                     redis_util.incr("total_duplicate")
+        time_used = int((time.time() -start_time)*1000)
+        logger.info(f"连接mysql用时:{time_used}ms")
         return item
