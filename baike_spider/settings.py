@@ -12,9 +12,9 @@ BOT_NAME = "baike_spider"
 SPIDER_MODULES = ["baike_spider.spiders"]
 NEWSPIDER_MODULE = "baike_spider.spiders"
 
-LOG_FILE = "/root/logs/baiker/all.log"
+LOG_FILE = "/root/logs/baike/all.log"
 LOG_LEVEL = "INFO"
-LOG_PATH = "/root/logs/baiker"
+LOG_PATH = "/root/logs/baike"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = "baike_spider (+http://www.yourdomain.com)"
