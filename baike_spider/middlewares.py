@@ -31,12 +31,12 @@ class RandomUserAgent(object):
 
 
 class ProxyDownloaderMiddleware:
-    _proxy = ('m846.kdltps.com', '15818')
+    _proxy = ('h104.kdltps.com', '15818')
 
     def process_request(self, request, spider):
         # 用户名密码认证
-        username = "t10157957789117"
-        password = "vr3xqtp1"
+        username = "t10191882634024"
+        password = "y7jja6hs"
         request.meta['proxy'] = "http://%(user)s:%(pwd)s@%(proxy)s/" % {"user": username, "pwd": password,
                                                                         "proxy": ':'.join(
                                                                             ProxyDownloaderMiddleware._proxy)}

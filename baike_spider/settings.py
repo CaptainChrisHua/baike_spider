@@ -55,7 +55,7 @@ CONCURRENT_REQUESTS = 10
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     "baike_spider.middlewares.RandomUserAgent": 43,
-    # 'baike_spider.middlewares.ProxyDownloaderMiddleware': 100
+    'baike_spider.middlewares.ProxyDownloaderMiddleware': 100
 }
 
 # Enable or disable extensions
