@@ -7,6 +7,7 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 
 from baike_spider.items import BaikeItem
+from baike_spider.settings import TRAFFIC
 from utils import logger, redis_util
 
 
@@ -14,6 +15,7 @@ from utils import logger, redis_util
 
 
 class BaikeCrawlSpider(CrawlSpider):
+
     name = "baike_crawl"
     allowed_domains = ["baike.baidu.com"]
     start_url = os.getenv("START_URL")
@@ -21,25 +23,16 @@ class BaikeCrawlSpider(CrawlSpider):
         start_url = redis_util.redis_conn.lpop("url_list")
     start_urls = [start_url]
     rules = (Rule(LinkExtractor(allow=r"/item/([^/]+)/(\d+)"), callback="parse_item", follow=True),)
-    # proxy_url = ("https://tps.kdlapi.com/api/gettps/?secret_id=oeb8i6leie0jh4v5xrda&num=1&signature="
-    #              "geq17eb8oexuttfmk7bomw1j36t3x5gc&pt=2&sep=1")
-    # proxy_ip = requests.get(proxy_url).text
-    # username = "17501689688"
-    # password = "3238978a"
-    # proxies = {
-    #     "http": "socks5h://%(user)s:%(pwd)s@%(proxy)s/" % {"user": username, "pwd": password, "proxy": proxy_ip},
-    #     "https": "socks5h://%(user)s:%(pwd)s@%(proxy)s/" % {"user": username, "pwd": password, "proxy": proxy_ip}
-    # }
     count = 0
     total = 0
     total_response_size = 0
     start_time = time.time()
-    if os.getenv("TRAFFIC"):
+    if TRAFFIC:
         traffic_start_time = time.time()
 
     def parse_item(self, response):
         self.total += 1
-        if os.getenv("TRAFFIC"):
+        if TRAFFIC:
             self.total_response_size += len(response.body)
         match = re.search(r"/item/([^/]+)/(\d+)", response.url)
         try:
@@ -48,7 +41,10 @@ class BaikeCrawlSpider(CrawlSpider):
         except AttributeError:
             return
         raw_summary = response.xpath('//div[contains(@class, "J-summary")]//text()').extract()
-        cleaned_summary = [re.sub(r' \[\d+\]|\[\d+\]|\n|\xa0', '', item) for item in raw_summary]
+        cleaned_summary = []
+        for item in raw_summary:
+            cleaned_item = re.sub(r' \[\d+\]|\[\d+\]|\n|\xa0', '', item)
+            cleaned_summary.append(cleaned_item)
         summary = ''.join(cleaned_summary)
         if summary:
             item = BaikeItem()
@@ -57,8 +53,7 @@ class BaikeCrawlSpider(CrawlSpider):
             item["text"] = summary
             item["source"] = "baike"
             yield item
-            self.count += 1
-            if os.getenv("TRAFFIC"):
+            if TRAFFIC:
                 time_used = int(time.time() - self.traffic_start_time)
                 logger.info(f"已访问{self.total}条数据，平均流量{int(self.total_response_size / time_used / 1024)}kb/s")
             if self.count % 100 == 0:
@@ -72,5 +67,5 @@ class BaikeCrawlSpider(CrawlSpider):
                 logger.info(
                     f"{self.total}:已爬取{total_topics}条数据，用时{total_time_used // 60}分{total_time_used % 60}秒")
                 logger.info(f"累计重复{total_duplicate}条，重复率：{(total_duplicate * 100 / total_topics):.2f}%")
-                if os.getenv("TRAFFIC"):
+                if TRAFFIC:
                     logger.info(f"平均流量{int(self.total_response_size / total_time_used / 1024)}kb/s")

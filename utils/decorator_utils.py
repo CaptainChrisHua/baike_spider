@@ -1,9 +1,9 @@
 # -*- coding:utf-8 -*-
 
 import functools
-import os
 import time
 
+from baike_spider.settings import TIMER
 from utils import logger
 
 
@@ -15,7 +15,7 @@ def timer(unit=None):
         def wrapper(*args, **kwargs):
             start = time.time()
             res = func(*args, **kwargs)
-            if os.getenv("TIMER"):
+            if TIMER:
                 time_used = round(time.time() - start, 3)
                 if unit == "ms":
                     logger.info(f'执行函数{func.__name__}，耗时{time_used * 1000}毫秒')
